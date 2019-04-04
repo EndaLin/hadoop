@@ -24,8 +24,7 @@
 
 <configuration>
 
-  <!-- IPC Configuration -->
-
+  <!-- IPC Configs -->
   <property>
     <description>Factory to create client IPC classes.</description>
     <name>yarn.ipc.client.factory.class</name>
@@ -47,8 +46,7 @@
     <value>org.apache.hadoop.yarn.ipc.HadoopYarnProtoRPC</value>
   </property>
   
-  <!-- Resource Manager Configuration -->
-
+  <!-- Resource Manager Configs -->
   <property>
     <description>The hostname of the RM.</description>
     <name>yarn.resourcemanager.hostname</name>
@@ -70,14 +68,6 @@
     </description>
     <name>yarn.resourcemanager.bind-host</name>
     <value></value>
-  </property>
-
-  <property>
-    <description>
-      If set to true, then ALL container updates will be automatically sent to
-      the NM in the next heartbeat</description>
-    <name>yarn.resourcemanager.auto-update.containers</name>
-    <value>false</value>
   </property>
 
   <property>
@@ -131,58 +121,8 @@
   </property>
 
   <property>
-    <description>
-      Specify which handler will be used to process PlacementConstraints.
-      Acceptable values are: `placement-processor`, `scheduler` and `disabled`.
-      For a detailed explanation of these values, please refer to documentation.
-    </description>
-    <name>yarn.resourcemanager.placement-constraints.handler</name>
-    <value>disabled</value>
-  </property>
-
-  <property>
-    <description>Number of times to retry placing of rejected SchedulingRequests</description>
-    <name>yarn.resourcemanager.placement-constraints.retry-attempts</name>
-    <value>3</value>
-  </property>
-
-  <property>
-    <description>Constraint Placement Algorithm to be used.</description>
-    <name>yarn.resourcemanager.placement-constraints.algorithm.class</name>
-    <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.constraint.algorithm.DefaultPlacementAlgorithm</value>
-  </property>
-
-  <property>
-    <description>Placement Algorithm Requests Iterator to be used.</description>
-    <name>yarn.resourcemanager.placement-constraints.algorithm.iterator</name>
-    <value>SERIAL</value>
-  </property>
-
-  <property>
-    <description>Threadpool size for the Algorithm used for placement constraint processing.</description>
-    <name>yarn.resourcemanager.placement-constraints.algorithm.pool-size</name>
-    <value>1</value>
-  </property>
-
-  <property>
-    <description>Threadpool size for the Scheduler invocation phase of placement constraint processing.</description>
-    <name>yarn.resourcemanager.placement-constraints.scheduler.pool-size</name>
-    <value>1</value>
-  </property>
-
-  <property>
-    <description>
-      Comma separated class names of ApplicationMasterServiceProcessor
-      implementations. The processors will be applied in the order
-      they are specified.
-    </description>
-    <name>yarn.resourcemanager.application-master-service.processors</name>
-    <value></value>
-  </property>
-
-  <property>
       <description>
-        This configures the HTTP endpoint for YARN Daemons.The following
+        This configures the HTTP endpoint for Yarn Daemons.The following
         values are supported:
         - HTTP_ONLY : Service is provided only on http
         - HTTPS_ONLY : Service is provided only on https
@@ -192,71 +132,15 @@
   </property>
 
   <property>
-    <description>
-      The http address of the RM web application.
-      If only a host is provided as the value,
-      the webapp will be served on a random port.
-    </description>
+    <description>The http address of the RM web application.</description>
     <name>yarn.resourcemanager.webapp.address</name>
     <value>${yarn.resourcemanager.hostname}:8088</value>
   </property>
 
   <property>
-    <description>
-      The https address of the RM web application.
-      If only a host is provided as the value,
-      the webapp will be served on a random port.
-    </description>
+    <description>The https adddress of the RM web application.</description>
     <name>yarn.resourcemanager.webapp.https.address</name>
     <value>${yarn.resourcemanager.hostname}:8090</value>
-  </property>
-
-  <property>
-    <description>
-    The Kerberos keytab file to be used for spnego filter for the RM web
-    interface.
-    </description>
-    <name>yarn.resourcemanager.webapp.spnego-keytab-file</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    The Kerberos principal to be used for spnego filter for the RM web
-    interface.
-    </description>
-    <name>yarn.resourcemanager.webapp.spnego-principal</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Add button to kill application in the RM Application view.
-    </description>
-    <name>yarn.resourcemanager.webapp.ui-actions.enabled</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>To enable RM web ui2 application.</description>
-    <name>yarn.webapp.ui2.enable</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      Explicitly provide WAR file path for ui2 if needed.
-    </description>
-    <name>yarn.webapp.ui2.war-file-path</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Enable services rest api on ResourceManager.
-    </description>
-    <name>yarn.webapp.api-service.enable</name>
-    <value>false</value>
   </property>
 
   <property>
@@ -267,12 +151,6 @@
   <property>
     <description>Are acls enabled.</description>
     <name>yarn.acl.enable</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>Are reservation acls enabled.</description>
-    <name>yarn.acl.reservation-enable</name>
     <value>false</value>
   </property>
 
@@ -367,12 +245,6 @@
   </property>
 
   <property>
-    <description>The expiry interval for node IP caching. -1 disables the caching</description>
-    <name>yarn.resourcemanager.node-ip-cache.expiry-interval-secs</name>
-    <value>-1</value>
-  </property>
-
-  <property>
     <description>Number of threads to handle resource tracker calls.</description>
     <name>yarn.resourcemanager.resource-tracker.client.thread-count</name>
     <value>50</value>
@@ -385,51 +257,39 @@
   </property>
 
   <property>
-    <description>The minimum allocation for every container request at the RM
-    in MBs. Memory requests lower than this will be set to the value of this
-    property. Additionally, a node manager that is configured to have less memory
-    than this value will be shut down by the resource manager.</description>
+    <description>The minimum allocation for every container request at the RM,
+    in MBs. Memory requests lower than this will throw a
+    InvalidResourceRequestException.</description>
     <name>yarn.scheduler.minimum-allocation-mb</name>
     <value>1024</value>
   </property>
 
   <property>
-    <description>The maximum allocation for every container request at the RM
-    in MBs. Memory requests higher than this will throw an
+    <description>The maximum allocation for every container request at the RM,
+    in MBs. Memory requests higher than this will throw a
     InvalidResourceRequestException.</description>
     <name>yarn.scheduler.maximum-allocation-mb</name>
     <value>8192</value>
   </property>
 
   <property>
-    <description>The minimum allocation for every container request at the RM
-    in terms of virtual CPU cores. Requests lower than this will be set to the
-    value of this property. Additionally, a node manager that is configured to
-    have fewer virtual cores than this value will be shut down by the resource
-    manager.</description>
+    <description>The minimum allocation for every container request at the RM,
+    in terms of virtual CPU cores. Requests lower than this will throw a
+    InvalidResourceRequestException.</description>
     <name>yarn.scheduler.minimum-allocation-vcores</name>
     <value>1</value>
   </property>
 
   <property>
-    <description>The maximum allocation for every container request at the RM
-    in terms of virtual CPU cores. Requests higher than this will throw an
+    <description>The maximum allocation for every container request at the RM,
+    in terms of virtual CPU cores. Requests higher than this will throw a
     InvalidResourceRequestException.</description>
     <name>yarn.scheduler.maximum-allocation-vcores</name>
-    <value>4</value>
+    <value>32</value>
   </property>
 
   <property>
-    <description>
-    Used by node labels.  If set to true, the port should be included in the
-    node name.  Only usable if your scheduler supports node labels.
-    </description>
-    <name>yarn.scheduler.include-port-in-node-name</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>Enable RM to recover state after starting. If true, then
+    <description>Enable RM to recover state after starting. If true, then 
       yarn.resourcemanager.store.class must be specified. </description>
     <name>yarn.resourcemanager.recovery.enabled</name>
     <value>false</value>
@@ -486,13 +346,6 @@
   </property>
 
   <property>
-    <description>When automatic failover is enabled, number of zookeeper
-      operation retry times in ActiveStandbyElector</description>
-    <name>yarn.resourcemanager.ha.failover-controller.active-standby-elector.zk.retries</name>
-    <!--<value>3</value>-->
-  </property>
-
-  <property>
     <description>The maximum number of completed applications RM state
     store keeps, less than or equals to ${yarn.resourcemanager.max-completed-applications}.
     By default, it equals to ${yarn.resourcemanager.max-completed-applications}.
@@ -500,11 +353,36 @@
     the applications remembered in RM memory.
     Any values larger than ${yarn.resourcemanager.max-completed-applications} will
     be reset to ${yarn.resourcemanager.max-completed-applications}.
-    Note that this value impacts the RM recovery performance. Typically,
+    Note that this value impacts the RM recovery performance.Typically,
     a smaller value indicates better performance on RM recovery.
     </description>
     <name>yarn.resourcemanager.state-store.max-completed-applications</name>
     <value>${yarn.resourcemanager.max-completed-applications}</value>
+  </property>
+
+  <property>
+    <description>Host:Port of the ZooKeeper server to be used by the RM. This
+      must be supplied when using the ZooKeeper based implementation of the
+      RM state store and/or embedded automatic failover in a HA setting.
+    </description>
+    <name>yarn.resourcemanager.zk-address</name>
+    <!--value>127.0.0.1:2181</value-->
+  </property>
+
+  <property>
+    <description>Number of times RM tries to connect to ZooKeeper.</description>
+    <name>yarn.resourcemanager.zk-num-retries</name>
+    <value>1000</value>
+  </property>
+
+  <property>
+    <description>Retry interval in milliseconds when connecting to ZooKeeper.
+      When HA is enabled, the value here is NOT used. It is generated
+      automatically from yarn.resourcemanager.zk-timeout-ms and
+      yarn.resourcemanager.zk-num-retries.
+    </description>
+    <name>yarn.resourcemanager.zk-retry-interval-ms</name>
+    <value>1000</value>
   </property>
 
   <property>
@@ -517,8 +395,24 @@
   </property>
 
   <property>
+    <description>ZooKeeper session timeout in milliseconds. Session expiration
+    is managed by the ZooKeeper cluster itself, not by the client. This value is
+    used by the cluster to determine when the client's session expires.
+    Expirations happens when the cluster does not hear from the client within
+    the specified session timeout period (i.e. no heartbeat).</description>
+    <name>yarn.resourcemanager.zk-timeout-ms</name>
+    <value>10000</value>
+  </property>
+
+  <property>
+    <description>ACL's to be used for ZooKeeper znodes.</description>
+    <name>yarn.resourcemanager.zk-acl</name>
+    <value>world:anyone:rwcda</value>
+  </property>
+
+  <property>
     <description>
-      ACLs to be used for the root znode when using ZKRMStateStore in an HA
+      ACLs to be used for the root znode when using ZKRMStateStore in a HA
       scenario for fencing.
 
       ZKRMStateStore supports implicit fencing to allow a single
@@ -542,6 +436,18 @@
   </property>
 
   <property>
+    <description>
+        Specify the auths to be used for the ACL's specified in both the
+        yarn.resourcemanager.zk-acl and
+        yarn.resourcemanager.zk-state-store.root-node.acl properties.  This
+        takes a comma-separated list of authentication mechanisms, each of the
+        form 'scheme:auth' (the same syntax used for the 'addAuth' command in
+        the ZK CLI).
+    </description>
+    <name>yarn.resourcemanager.zk-auth</name>
+  </property>
+
+  <property>
     <description>URI pointing to the location of the FileSystem path where
     RM state will be stored. This must be supplied when using
     org.apache.hadoop.yarn.server.resourcemanager.recovery.FileSystemRMStateStore
@@ -549,6 +455,16 @@
     <name>yarn.resourcemanager.fs.state-store.uri</name>
     <value>${hadoop.tmp.dir}/yarn/system/rmstore</value>
     <!--value>hdfs://localhost:9000/rmstore</value-->
+  </property>
+
+  <property>
+    <description>hdfs client retry policy specification. hdfs client retry
+    is always enabled. Specified in pairs of sleep-time and number-of-retries
+    and (t0, n0), (t1, n1), ..., the first n0 retries sleep t0 milliseconds on
+    average, the following n1 retries sleep t1 milliseconds on average, and so on.
+    </description>
+    <name>yarn.resourcemanager.fs.state-store.retry-policy-spec</name>
+    <value>2000, 500</value>
   </property>
 
   <property>
@@ -619,52 +535,6 @@
       when using ZooKeeper based leader election.</description>
     <name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
     <value>/yarn-leader-election</value>
-  </property>
-
-  <property>
-    <description>Index at which last section of application id (with each section
-      separated by _ in application id) will be split so that application znode
-      stored in zookeeper RM state store will be stored as two different znodes
-      (parent-child). Split is done from the end.
-      For instance, with no split, appid znode will be of the form
-      application_1352994193343_0001. If the value of this config is 1, the
-      appid znode will be broken into two parts application_1352994193343_000
-      and 1 respectively with former being the parent node.
-      application_1352994193343_0002 will then be stored as 2 under the parent
-      node application_1352994193343_000. This config can take values from 0 to 4.
-      0 means there will be no split. If configuration value is outside this
-      range, it will be treated as config value of 0(i.e. no split). A value
-      larger than 0 (up to 4) should be configured if you are storing a large number
-      of apps in ZK based RM state store and state store operations are failing due to
-      LenError in Zookeeper.</description>
-    <name>yarn.resourcemanager.zk-appid-node.split-index</name>
-    <value>0</value>
-  </property>
-
-  <property>
-    <description>Index at which the RM Delegation Token ids will be split so
-      that the delegation token znodes stored in the zookeeper RM state store
-      will be stored as two different znodes (parent-child). The split is done
-      from the end. For instance, with no split, a delegation token znode will
-      be of the form RMDelegationToken_123456789. If the value of this config is
-      1, the delegation token znode will be broken into two parts:
-      RMDelegationToken_12345678 and 9 respectively with former being the parent
-      node. This config can take values from 0 to 4. 0 means there will be no
-      split. If the value is outside this range, it will be treated as 0 (i.e.
-      no split). A value larger than 0 (up to 4) should be configured if you are
-      running a large number of applications, with long-lived delegation tokens
-      and state store operations (e.g. failover) are failing due to LenError in
-      Zookeeper.</description>
-    <name>yarn.resourcemanager.zk-delegation-token-node.split-index</name>
-    <value>0</value>
-  </property>
-
-  <property>
-    <description>Specifies the maximum size of the data that can be stored
-      in a znode. Value should be same or less than jute.maxbuffer configured
-      in zookeeper. Default value configured is 1MB.</description>
-    <name>yarn.resourcemanager.zk-max-znode-size.bytes</name>
-    <value>1048576</value>
   </property>
 
   <property>
@@ -753,23 +623,13 @@
   <property>
     <description>The maximum number of completed applications RM keeps. </description>
     <name>yarn.resourcemanager.max-completed-applications</name>
-    <value>1000</value>
+    <value>10000</value>
   </property>
 
   <property>
     <description>Interval at which the delayed token removal thread runs</description>
     <name>yarn.resourcemanager.delayed.delegation-token.removal-interval-ms</name>
     <value>30000</value>
-  </property>
-
-  <property>
-    <description>Maximum size in bytes for configurations that can be provided
-      by application to RM for delegation token renewal.
-      By experiment, it's roughly 128 bytes per key-value pair.
-      The default value 12800 allows roughly 100 configs, may be less.
-    </description>
-    <name>yarn.resourcemanager.delegation-token.max-conf-size-bytes</name>
-    <value>12800</value>
   </property>
 
   <property>
@@ -849,39 +709,11 @@
   </property>
 
   <property>
-    <description>
-    The value specifies the file system (e.g. HDFS) path where ResourceManager
-    loads configuration if yarn.resourcemanager.configuration.provider-class
-    is set to org.apache.hadoop.yarn.FileSystemBasedConfigurationProvider.
-    </description>
-    <name>yarn.resourcemanager.configuration.file-system-based-store</name>
-    <value>/yarn/conf</value>
-  </property>
-
-  <property>
     <description>The setting that controls whether yarn system metrics is
-    published to the Timeline server (version one) or not, by RM.
-    This configuration is now deprecated in favor of
-    yarn.system-metrics-publisher.enabled.</description>
+    published on the timeline server or not by RM.</description>
     <name>yarn.resourcemanager.system-metrics-publisher.enabled</name>
     <value>false</value>
   </property>
-
-  <property>
-    <description>The setting that controls whether yarn system metrics is
-    published on the Timeline service or not by RM And NM.</description>
-    <name>yarn.system-metrics-publisher.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>The setting that controls whether yarn container events are
-    published to the timeline service or not by RM. This configuration setting
-    is for ATS V2.</description>
-    <name>yarn.rm.system-metrics-publisher.emit-container-events</name>
-    <value>false</value>
-  </property>
-
 
   <property>
     <description>Number of worker threads that send the yarn system metrics
@@ -890,144 +722,7 @@
     <value>10</value>
   </property>
 
-  <property>
-    <description>Number of diagnostics/failure messages can be saved in RM for
-    log aggregation. It also defines the number of diagnostics/failure
-    messages can be shown in log aggregation web ui.</description>
-    <name>yarn.resourcemanager.max-log-aggregation-diagnostics-in-memory</name>
-    <value>10</value>
-  </property>
-
   <!-- Node Manager Configs -->
-
-  <property>
-    <description>
-    RM DelegationTokenRenewer thread count
-    </description>
-    <name>yarn.resourcemanager.delegation-token-renewer.thread-count</name>
-    <value>50</value>
-  </property>
-
-  <property>
-    <description>
-    RM secret key update interval in ms
-    </description>
-    <name>yarn.resourcemanager.delegation.key.update-interval</name>
-    <value>86400000</value>
-  </property>
-
-  <property>
-    <description>
-    RM delegation token maximum lifetime in ms
-    </description>
-    <name>yarn.resourcemanager.delegation.token.max-lifetime</name>
-    <value>604800000</value>
-  </property>
-
-  <property>
-    <description>
-    RM delegation token update interval in ms
-    </description>
-    <name>yarn.resourcemanager.delegation.token.renew-interval</name>
-    <value>86400000</value>
-  </property>
-
-  <property>
-    <description>
-    Thread pool size for RMApplicationHistoryWriter.
-    </description>
-    <name>yarn.resourcemanager.history-writer.multi-threaded-dispatcher.pool-size</name>
-    <value>10</value>
-  </property>
-
-  <property>
-    <description>
-    Comma-separated list of values (in minutes) for schedule queue related
-    metrics.
-    </description>
-    <name>yarn.resourcemanager.metrics.runtime.buckets</name>
-    <value>60,300,1440</value>
-  </property>
-
-  <property>
-    <description>
-    Interval for the roll over for the master key used to generate
-    NodeManager tokens.  It is expected to be set to a value much larger
-    than yarn.nm.liveness-monitor.expiry-interval-ms.
-    </description>
-    <name>yarn.resourcemanager.nm-tokens.master-key-rolling-interval-secs</name>
-    <value>86400</value>
-  </property>
-
-  <property>
-    <description>
-    Flag to enable the ResourceManager reservation system.
-    </description>
-    <name>yarn.resourcemanager.reservation-system.enable</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    The Java class to use as the ResourceManager reservation system.
-    By default, is set to
-    org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacityReservationSystem
-    when using CapacityScheduler and is set to
-    org.apache.hadoop.yarn.server.resourcemanager.reservation.FairReservationSystem
-    when using FairScheduler.
-    </description>
-    <name>yarn.resourcemanager.reservation-system.class</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    The plan follower policy class name to use for the ResourceManager
-    reservation system.
-    By default, is set to
-    org.apache.hadoop.yarn.server.resourcemanager.reservation.CapacitySchedulerPlanFollower
-    is used when using CapacityScheduler, and is set to
-    org.apache.hadoop.yarn.server.resourcemanager.reservation.FairSchedulerPlanFollower
-    when using FairScheduler.
-    </description>
-    <name>yarn.resourcemanager.reservation-system.plan.follower</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Step size of the reservation system in ms
-    </description>
-    <name>yarn.resourcemanager.reservation-system.planfollower.time-step</name>
-    <value>1000</value>
-  </property>
-
-  <property>
-    <description>
-    The expiry interval for a container
-    </description>
-    <name>yarn.resourcemanager.rm.container-allocation.expiry-interval-ms</name>
-    <value>600000</value>
-  </property>
-
-  <property>
-    <description>
-    Flag to enable/disable resource profiles
-    </description>
-    <name>yarn.resourcemanager.resource-profiles.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    If resource profiles is enabled, source file for the profiles
-    </description>
-    <name>yarn.resourcemanager.resource-profiles.source-file</name>
-    <value>resource-profiles.json</value>
-  </property>
-
-  <!-- Node Manager Configuration -->
-
   <property>
     <description>The hostname of the NM.</description>
     <name>yarn.nodemanager.hostname</name>
@@ -1060,31 +755,20 @@
   <property>
     <description>Environment variables that containers may override rather than use NodeManager's default.</description>
     <name>yarn.nodemanager.env-whitelist</name>
-    <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ</value>
+    <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,HADOOP_YARN_HOME</value>
   </property>
 
   <property>
     <description>who will execute(launch) the containers.</description>
     <name>yarn.nodemanager.container-executor.class</name>
     <value>org.apache.hadoop.yarn.server.nodemanager.DefaultContainerExecutor</value>
-  </property>
-
-  <property>
-    <description>Comma separated List of container state transition listeners.</description>
-    <name>yarn.nodemanager.container-state-transition-listener.classes</name>
-    <value></value>
+<!--<value>org.apache.hadoop.yarn.server.nodemanager.LinuxContainerExecutor</value>-->
   </property>
 
   <property>
     <description>Number of threads container manager uses.</description>
     <name>yarn.nodemanager.container-manager.thread-count</name>
     <value>20</value>
-  </property>
-
-    <property>
-    <description>Number of threads collector service uses.</description>
-    <name>yarn.nodemanager.collector-service.thread-count</name>
-    <value>5</value>
   </property>
 
   <property>
@@ -1094,26 +778,19 @@
   </property>
 
   <property>
-    <description>Max number of OPPORTUNISTIC containers to queue at the
-      nodemanager.</description>
-    <name>yarn.nodemanager.opportunistic-containers-max-queue-length</name>
-    <value>0</value>
-  </property>
-
-  <property>
     <description>
       Number of seconds after an application finishes before the nodemanager's 
       DeletionService will delete the application's localized file directory
       and log directory.
       
-      To diagnose YARN application problems, set this property's value large
+      To diagnose Yarn application problems, set this property's value large
       enough (for example, to 600 = 10 minutes) to permit examination of these
       directories. After changing the property's value, you must restart the 
       nodemanager in order for it to have an effect.
 
-      The roots of YARN applications' work directories is configurable with
+      The roots of Yarn applications' work directories is configurable with
       the yarn.nodemanager.local-dirs property (see below), and the roots
-      of the YARN applications' log directories is configurable with the
+      of the Yarn applications' log directories is configurable with the 
       yarn.nodemanager.log-dirs property (see also below).
     </description>
     <name>yarn.nodemanager.delete.debug-delay-sec</name>
@@ -1162,13 +839,6 @@
     <value>${yarn.nodemanager.hostname}:8040</value>
   </property>
 
-
-  <property>
-    <description>Address where the collector service IPC is.</description>
-    <name>yarn.nodemanager.collector-service.address</name>
-    <value>${yarn.nodemanager.hostname}:8048</value>
-  </property>
-
   <property>
     <description>Interval in between cache cleanups.</description>
     <name>yarn.nodemanager.localizer.cache.cleanup.interval-ms</name>
@@ -1198,22 +868,7 @@
 
   <property>
     <description>
-    </description>
-    <name>yarn.nodemanager.container-localizer.java.opts</name>
-    <value>-Xmx256m</value>
-  </property>
-
-  <property>
-    <description>
-      The log level for container localizer while it is an independent process.
-    </description>
-    <name>yarn.nodemanager.container-localizer.log.level</name>
-    <value>INFO</value>
-  </property>
-
-  <property>
-    <description>
-      Where to store container logs. An application's localized log directory
+      Where to store container logs. An application's localized log directory 
       will be found in ${yarn.nodemanager.log-dirs}/application_${appid}.
       Individual containers' log directories will be below this, in directories 
       named container_{$contid}. Each container directory will contain the files
@@ -1221,16 +876,6 @@
     </description>
     <name>yarn.nodemanager.log-dirs</name>
     <value>${yarn.log.dir}/userlogs</value>
-  </property>
-
-  <property>
-    <description>
-      The permissions settings used for the creation of container
-      directories when using DefaultContainerExecutor.  This follows
-      standard user/group/all permissions format.
-    </description>
-    <name>yarn.nodemanager.default-container-executor.log-dirs.permissions</name>
-    <value>710</value>
   </property>
 
   <property>
@@ -1263,38 +908,6 @@
   </property>
 
   <property>
-    <description>Specify which log file controllers we will support. The first
-    file controller we add will be used to write the aggregated logs.
-    This comma separated configuration will work with the configuration:
-    yarn.log-aggregation.file-controller.%s.class which defines the supported
-    file controller's class. By default, the TFile controller would be used.
-    The user could override this configuration by adding more file controllers.
-    To support back-ward compatibility, make sure that we always
-    add TFile file controller.</description>
-    <name>yarn.log-aggregation.file-formats</name>
-    <value>TFile</value>
-  </property>
-
-  <property>
-    <description>Class that supports TFile read and write operations.</description>
-    <name>yarn.log-aggregation.file-controller.TFile.class</name>
-    <value>org.apache.hadoop.yarn.logaggregation.filecontroller.tfile.LogAggregationTFileController</value>
-  </property>
-
-  <property>
-    <description>
-    How long for ResourceManager to wait for NodeManager to report its
-    log aggregation status. If waiting time of which the log aggregation
-    status is reported from NodeManager exceeds the configured value, RM
-    will report log aggregation status for this NodeManager as TIME_OUT.
-    This configuration will be used in NodeManager as well to decide
-    whether and when to delete the cached log aggregation status.
-    </description>
-    <name>yarn.log-aggregation-status.time-out.ms</name>
-    <value>600000</value>
-  </property>
-
-  <property>
     <description>Time in seconds to retain user logs. Only applicable if
     log aggregation is disabled
     </description>
@@ -1316,69 +929,10 @@
   </property>
 
   <property>
-    <description>Generate additional logs about container launches.
-    Currently, this creates a copy of the launch script and lists the
-    directory contents of the container work dir. When listing directory
-    contents, we follow symlinks to a max-depth of 5(including symlinks
-    which point to outside the container work dir) which may lead to a
-    slowness in launching containers.
-    </description>
-    <name>yarn.nodemanager.log-container-debug-info.enabled</name>
-    <value>true</value>
-  </property>
-
-  <property>
     <description>Amount of physical memory, in MB, that can be allocated 
-    for containers. If set to -1 and
-    yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
-    automatically calculated(in case of Windows and Linux).
-    In other cases, the default is 8192MB.
-    </description>
+    for containers.</description>
     <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>-1</value>
-  </property>
-
-  <property>
-    <description>Amount of physical memory, in MB, that is reserved
-    for non-YARN processes. This configuration is only used if
-    yarn.nodemanager.resource.detect-hardware-capabilities is set
-    to true and yarn.nodemanager.resource.memory-mb is -1. If set
-    to -1, this amount is calculated as
-    20% of (system memory - 2*HADOOP_HEAPSIZE)
-    </description>
-    <name>yarn.nodemanager.resource.system-reserved-memory-mb</name>
-    <value>-1</value>
-  </property>
-
-  <property>
-    <description>Whether YARN CGroups memory tracking is enabled.</description>
-    <name>yarn.nodemanager.resource.memory.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>Whether YARN CGroups strict memory enforcement is enabled.
-    </description>
-    <name>yarn.nodemanager.resource.memory.enforced</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>If memory limit is enforced, this the percentage of soft limit
-      compared to the memory assigned to the container. If there is memory
-      pressure container memory usage will be pushed back to its soft limit
-      by swapping out memory.
-    </description>
-    <name>yarn.nodemanager.resource.memory.cgroups.soft-limit-percentage</name>
-    <value>90.0</value>
-  </property>
-
-  <property>
-    <description>Container swappiness is the likelihood a page will be swapped
-      out compared to be kept in memory. Value is between 0-100.
-    </description>
-    <name>yarn.nodemanager.resource.memory.cgroups.swappiness</name>
-    <value>0</value>
+    <value>8192</value>
   </property>
 
   <property>
@@ -1409,42 +963,9 @@
     <description>Number of vcores that can be allocated
     for containers. This is used by the RM scheduler when allocating
     resources for containers. This is not used to limit the number of
-    CPUs used by YARN containers. If it is set to -1 and
-    yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
-    automatically determined from the hardware in case of Windows and Linux.
-    In other cases, number of vcores is 8 by default.</description>
+    physical cores used by YARN containers.</description>
     <name>yarn.nodemanager.resource.cpu-vcores</name>
-    <value>-1</value>
-  </property>
-
-  <property>
-    <description>Flag to determine if logical processors(such as
-    hyperthreads) should be counted as cores. Only applicable on Linux
-    when yarn.nodemanager.resource.cpu-vcores is set to -1 and
-    yarn.nodemanager.resource.detect-hardware-capabilities is true.
-    </description>
-    <name>yarn.nodemanager.resource.count-logical-processors-as-cores</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>Multiplier to determine how to convert phyiscal cores to
-    vcores. This value is used if yarn.nodemanager.resource.cpu-vcores
-    is set to -1(which implies auto-calculate vcores) and
-    yarn.nodemanager.resource.detect-hardware-capabilities is set to true. The
-    number of vcores will be calculated as
-    number of CPUs * multiplier.
-    </description>
-    <name>yarn.nodemanager.resource.pcores-vcores-multiplier</name>
-    <value>1.0</value>
-  </property>
-
-  <property>
-    <description>
-    Thread pool size for LogAggregationService in Node Manager.
-    </description>
-    <name>yarn.nodemanager.logaggregation.threadpool-size-max</name>
-    <value>100</value>
+    <value>8</value>
   </property>
 
   <property>
@@ -1458,74 +979,19 @@
   </property>
 
   <property>
-    <description>Enable auto-detection of node capabilities such as
-    memory and CPU.
-    </description>
-    <name>yarn.nodemanager.resource.detect-hardware-capabilities</name>
-    <value>false</value>
-  </property>
-
-  <property>
     <description>NM Webapp address.</description>
     <name>yarn.nodemanager.webapp.address</name>
     <value>${yarn.nodemanager.hostname}:8042</value>
   </property>
 
   <property>
-    <description>
-    The https adddress of the NM web application.
-    </description>
-    <name>yarn.nodemanager.webapp.https.address</name>
-    <value>0.0.0.0:8044</value>
-  </property>
-
-  <property>
-    <description>
-    The Kerberos keytab file to be used for spnego filter for the NM web
-    interface.
-    </description>
-    <name>yarn.nodemanager.webapp.spnego-keytab-file</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    The Kerberos principal to be used for spnego filter for the NM web
-    interface.
-    </description>
-    <name>yarn.nodemanager.webapp.spnego-principal</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>How often to monitor the node and the containers.
-    If 0 or negative, monitoring is disabled.</description>
-    <name>yarn.nodemanager.resource-monitor.interval-ms</name>
+    <description>How often to monitor containers.</description>
+    <name>yarn.nodemanager.container-monitor.interval-ms</name>
     <value>3000</value>
   </property>
 
   <property>
-    <description>Class that calculates current resource utilization.</description>
-    <name>yarn.nodemanager.resource-calculator.class</name>
-  </property>
-
-  <property>
-    <description>Enable container monitor</description>
-    <name>yarn.nodemanager.container-monitor.enabled</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>How often to monitor containers. If not set, the value for
-    yarn.nodemanager.resource-monitor.interval-ms will be used.
-    If 0 or negative, container monitoring is disabled.</description>
-    <name>yarn.nodemanager.container-monitor.interval-ms</name>
-  </property>
-
-  <property>
-    <description>Class that calculates containers current resource utilization.
-    If not set, the value for yarn.nodemanager.resource-calculator.class will
-    be used.</description>
+    <description>Class that calculates containers current resource utilization.</description>
     <name>yarn.nodemanager.container-monitor.resource-calculator.class</name>
   </property>
 
@@ -1580,17 +1046,6 @@
   </property>
 
   <property>
-    <description>The low threshold percentage of disk space used when a bad disk is
-    marked as good. Values can range from 0.0 to 100.0. This applies to
-    yarn.nodemanager.local-dirs and yarn.nodemanager.log-dirs.
-    Note that if its value is more than yarn.nodemanager.disk-health-checker.
-    max-disk-utilization-per-disk-percentage or not set, it will be set to the same value as
-    yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage.</description>
-    <name>yarn.nodemanager.disk-health-checker.disk-utilization-watermark-low-per-disk-percentage</name>
-    <value></value>
-  </property>
-
-  <property>
     <description>The minimum space that must be available on a disk for
     it to be used. This applies to yarn.nodemanager.local-dirs and
     yarn.nodemanager.log-dirs.</description>
@@ -1612,53 +1067,28 @@
 
   <property>
     <description>The cgroups hierarchy under which to place YARN proccesses (cannot contain commas).
-    If yarn.nodemanager.linux-container-executor.cgroups.mount is false
-    (that is, if cgroups have been pre-configured) and the YARN user has write
-    access to the parent directory, then the directory will be created.
-    If the directory already exists, the administrator has to give YARN
-    write permissions to it recursively.
-    This property only applies when the LCE resources handler is set to
-    CgroupsLCEResourcesHandler.</description>
+    If yarn.nodemanager.linux-container-executor.cgroups.mount is false (that is, if cgroups have
+    been pre-configured), then this cgroups hierarchy must already exist and be writable by the
+    NodeManager user, otherwise the NodeManager may fail.
+    Only used when the LCE resources handler is set to the CgroupsLCEResourcesHandler.</description>
     <name>yarn.nodemanager.linux-container-executor.cgroups.hierarchy</name>
     <value>/hadoop-yarn</value>
   </property>
 
   <property>
     <description>Whether the LCE should attempt to mount cgroups if not found.
-    This property only applies when the LCE resources handler is set to
-    CgroupsLCEResourcesHandler.
-    </description>
+    Only used when the LCE resources handler is set to the CgroupsLCEResourcesHandler.</description>
     <name>yarn.nodemanager.linux-container-executor.cgroups.mount</name>
     <value>false</value>
   </property>
 
   <property>
-    <description>This property sets the path from which YARN will read the
-    CGroups configuration. YARN has built-in functionality to discover the
-    system CGroup mount paths, so use this property only if YARN's automatic
-    mount path discovery does not work.
-
-    The path specified by this property must exist before the NodeManager is
-    launched.
-    If yarn.nodemanager.linux-container-executor.cgroups.mount is set to true,
-    YARN will first try to mount the CGroups at the specified path before
-    reading them.
-    If yarn.nodemanager.linux-container-executor.cgroups.mount is set to
-    false, YARN will read the CGroups at the specified path.
-    If this property is empty, YARN tries to detect the CGroups location.
-
-    Please refer to NodeManagerCgroups.html in the documentation for further
-    details.
-    This property only applies when the LCE resources handler is set to
-    CgroupsLCEResourcesHandler.
-    </description>
+    <description>Where the LCE should attempt to mount cgroups if not found. Common locations
+    include /sys/fs/cgroup and /cgroup; the default location can vary depending on the Linux
+    distribution in use. This path must exist before the NodeManager is launched.
+    Only used when the LCE resources handler is set to the CgroupsLCEResourcesHandler, and
+    yarn.nodemanager.linux-container-executor.cgroups.mount is true.</description>
     <name>yarn.nodemanager.linux-container-executor.cgroups.mount-path</name>
-  </property>
-
-  <property>
-    <description>Delay in ms between attempts to remove linux cgroup</description>
-    <name>yarn.nodemanager.linux-container-executor.cgroups.delete-delay-ms</name>
-    <value>20</value>
   </property>
 
   <property>
@@ -1695,145 +1125,9 @@
     or be allowed to consume spare resources if they need them. For example, turning the
     flag on will restrict apps to use only their share of CPU, even if the node has spare
     CPU cycles. The default value is false i.e. use available resources. Please note that
-    turning this flag on may reduce job throughput on the cluster. This setting does
-    not apply to other subsystems like memory.</description>
+    turning this flag on may reduce job throughput on the cluster.</description>
     <name>yarn.nodemanager.linux-container-executor.cgroups.strict-resource-usage</name>
     <value>false</value>
-  </property>
-
-  <property>
-    <description>Comma separated list of runtimes that are allowed when using
-    LinuxContainerExecutor. The allowed values are default, docker, and
-    javasandbox.</description>
-    <name>yarn.nodemanager.runtime.linux.allowed-runtimes</name>
-    <value>default</value>
-  </property>
-
-  <property>
-    <description>This configuration setting determines the capabilities
-      assigned to docker containers when they are launched. While these may not
-      be case-sensitive from a docker perspective, it is best to keep these
-      uppercase. To run without any capabilities, set this value to
-      "none" or "NONE"</description>
-    <name>yarn.nodemanager.runtime.linux.docker.capabilities</name>
-    <value>CHOWN,DAC_OVERRIDE,FSETID,FOWNER,MKNOD,NET_RAW,SETGID,SETUID,SETFCAP,SETPCAP,NET_BIND_SERVICE,SYS_CHROOT,KILL,AUDIT_WRITE</value>
-  </property>
-
-  <property>
-    <description>This configuration setting determines if privileged docker
-      containers are allowed on this cluster. Privileged containers are granted
-      the complete set of capabilities and are not subject to the limitations
-      imposed by the device cgroup controller. In other words, privileged
-      containers can do almost everything that the host can do. Use with
-      extreme care.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.privileged-containers.allowed</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>This configuration setting determines who is allowed to run
-      privileged docker containers on this cluster. Use with extreme care.
-    </description>
-    <name>yarn.nodemanager.runtime.linux.docker.privileged-containers.acl</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>The set of networks allowed when launching containers using the
-      DockerContainerRuntime.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.allowed-container-networks</name>
-    <value>host,none,bridge</value>
-  </property>
-
-  <property>
-    <description>The network used when launching containers using the
-      DockerContainerRuntime when no network is specified in the request
-      . This network must be one of the (configurable) set of allowed container
-      networks.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.default-container-network</name>
-    <value>host</value>
-  </property>
-
-  <property>
-    <description>This configuration setting determines whether the host's PID
-      namespace is allowed for docker containers on this cluster.
-      Use with care.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.host-pid-namespace.allowed</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>Property to enable docker user remapping</description>
-    <name>yarn.nodemanager.runtime.linux.docker.enable-userremapping.allowed</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>lower limit for acceptable uids of user remapped user</description>
-    <name>yarn.nodemanager.runtime.linux.docker.userremapping-uid-threshold</name>
-    <value>1</value>
-  </property>
-
-
-  <property>
-    <description>lower limit for acceptable gids of user remapped user</description>
-    <name>yarn.nodemanager.runtime.linux.docker.userremapping-gid-threshold</name>
-    <value>1</value>
-  </property>
-
-  <property>
-    <description>Whether or not users are allowed to request that Docker
-      containers honor the debug deletion delay. This is useful for
-      troubleshooting Docker container related launch failures.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.delayed-removal.allowed</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>The default list of read-only mounts to be bind-mounted
-      into all Docker containers that use DockerContainerRuntime.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.default-ro-mounts</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>The default list of read-write mounts to be bind-mounted
-      into all Docker containers that use DockerContainerRuntime.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.default-rw-mounts</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>The default list of tmpfs mounts to be mounted into all Docker
-      containers that use DockerContainerRuntime.</description>
-    <name>yarn.nodemanager.runtime.linux.docker.default-tmpfs-mounts</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>The mode in which the Java Container Sandbox should run detailed by
-      the JavaSandboxLinuxContainerRuntime.</description>
-    <name>yarn.nodemanager.runtime.linux.sandbox-mode</name>
-    <value>disabled</value>
-  </property>
-
-  <property>
-    <description>Permissions for application local directories.</description>
-    <name>yarn.nodemanager.runtime.linux.sandbox-mode.local-dirs.permissions</name>
-    <value>read</value>
-  </property>
-
-  <property>
-    <description>Location for non-default java policy file.</description>
-    <name>yarn.nodemanager.runtime.linux.sandbox-mode.policy</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>The group which will run by default without the java security
-      manager.</description>
-    <name>yarn.nodemanager.runtime.linux.sandbox-mode.whitelist-group</name>
-    <value></value>
   </property>
 
   <property>
@@ -1848,23 +1142,6 @@
     Object of the containers launched by the default container executor.</description>
     <name>yarn.nodemanager.windows-container.cpu-limit.enabled</name>
     <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Interval of time the linux container executor should try cleaning up
-    cgroups entry when cleaning up a container.
-    </description>
-    <name>yarn.nodemanager.linux-container-executor.cgroups.delete-timeout-ms</name>
-    <value>1000</value>
-  </property>
-
-  <property>
-    <description>
-    The UNIX group that the linux-container-executor should run as.
-    </description>
-    <name>yarn.nodemanager.linux-container-executor.group</name>
-    <value></value>
   </property>
 
   <property>
@@ -1896,7 +1173,7 @@
   <property>
     <description>Max time to wait for a process to come up when trying to cleanup a container</description>
     <name>yarn.nodemanager.process-kill-wait.ms</name>
-    <value>5000</value>
+    <value>2000</value>
   </property>
 
   <property>
@@ -1905,19 +1182,6 @@
       equal to or greater than the NM version), or a Version String.</description>
     <name>yarn.nodemanager.resourcemanager.minimum.version</name>
     <value>NONE</value>
-  </property>
-
-  <property>
-    <description>Maximum size of contain's diagnostics to keep for relaunching
-      container case.</description>
-    <name>yarn.nodemanager.container-diagnostics-maximum-size</name>
-    <value>10000</value>
-  </property>
-
-  <property>
-    <description>Minimum container restart interval in milliseconds.</description>
-    <name>yarn.nodemanager.container-retry-minimum-interval-ms</name>
-    <value>1000</value>
   </property>
 
   <property>
@@ -1937,26 +1201,6 @@
     <description>Time interval between each attempt to connect to NM</description>
     <name>yarn.client.nodemanager-connect.retry-interval-ms</name>
     <value>10000</value>
-  </property>
-
-  <property>
-    <description>
-      Max time to wait for NM to connect to RM.
-      When not set, proxy will fall back to use value of
-      yarn.resourcemanager.connect.max-wait.ms.
-    </description>
-    <name>yarn.nodemanager.resourcemanager.connect.max-wait.ms</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Time interval between each NM attempt to connect to RM.
-      When not set, proxy will fall back to use value of
-      yarn.resourcemanager.connect.retry-interval.ms.
-    </description>
-    <name>yarn.nodemanager.resourcemanager.connect.retry-interval.ms</name>
-    <value></value>
   </property>
 
   <property>
@@ -2005,40 +1249,6 @@
   </property>
 
   <property>
-    <description>Whether the nodemanager is running under supervision. A
-      nodemanager that supports recovery and is running under supervision
-      will not try to cleanup containers as it exits with the assumption
-      it will be immediately be restarted and recover containers.</description>
-    <name>yarn.nodemanager.recovery.supervised</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Adjustment to the container OS scheduling priority.  In Linux, passed
-    directly to the nice command. If unspecified then containers are launched
-    without any explicit OS priority.
-    </description>
-    <name>yarn.nodemanager.container-executor.os.sched.priority.adjustment</name>
-  </property>
-
-  <property>
-    <description>
-    Flag to enable container metrics
-    </description>
-    <name>yarn.nodemanager.container-metrics.enable</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>
-    Container metrics flush period in ms.  Set to -1 for flush on completion.
-    </description>
-    <name>yarn.nodemanager.container-metrics.period-ms</name>
-    <value>-1</value>
-  </property>
-
-  <property>
     <description>
     The delay time ms to unregister container metrics after completion.
     </description>
@@ -2046,48 +1256,34 @@
     <value>10000</value>
   </property>
 
-  <property>
-    <description>
-    Class used to calculate current container resource utilization.
-    </description>
-    <name>yarn.nodemanager.container-monitor.process-tree.class</name>
-    <value></value>
-  </property>
+  <!--Docker configuration-->
 
   <property>
+    <name>yarn.nodemanager.docker-container-executor.exec-name</name>
+    <value>/usr/bin/docker</value>
     <description>
-    Flag to enable NodeManager disk health checker
+      Name or path to the Docker client.
     </description>
-    <name>yarn.nodemanager.disk-health-checker.enable</name>
-    <value>true</value>
   </property>
 
-  <property>
-    <description>
-    Number of threads to use in NM log cleanup.  Used when log aggregation
-    is disabled.
-    </description>
-    <name>yarn.nodemanager.log.deletion-threads-count</name>
-    <value>4</value>
-  </property>
-
-  <property>
-    <description>
-    The Windows group that the windows-container-executor should run as.
-    </description>
-    <name>yarn.nodemanager.windows-secure-container-executor.group</name>
-    <value></value>
-  </property>
-
-  <!-- Map Reduce Configuration -->
-
+  <!--Map Reduce configuration-->
   <property>
     <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
     <value>org.apache.hadoop.mapred.ShuffleHandler</value>
   </property>
 
-  <!-- WebAppProxy Configuration -->
+  <property>
+    <name>mapreduce.job.jar</name>
+    <value/>
+  </property>
 
+  <property>
+    <name>mapreduce.job.hdfs-servers</name>
+    <value>${fs.defaultFS}</value>
+  </property>
+
+  <!-- WebAppProxy Configuration-->
+  
   <property>
     <description>The kerberos principal for the proxy, if the proxy is not
     running as part of the RM.</description>
@@ -2108,8 +1304,8 @@
      <value/>
   </property>
 
-  <!-- Applications' Configuration -->
-
+  <!-- Applications' Configuration-->
+  
   <property>
     <description>
       CLASSPATH for YARN applications. A comma-separated list
@@ -2136,21 +1332,7 @@
     <value></value>
   </property>
 
-  <!-- Timeline Service Configuration -->
-
-  <property>
-    <description>Indicate what is the current version of the running
-    timeline service. For example, if "yarn.timeline-service.version" is 1.5,
-    and "yarn.timeline-service.enabled" is true, it means the cluster will and
-    should bring up the timeline service v.1.5 (and nothing else).
-    On the client side, if the client uses the same version of timeline service,
-    it should succeed. If the client chooses to use a smaller version in spite of this,
-    then depending on how robust the compatibility story is between versions,
-    the results may vary.
-    </description>
-    <name>yarn.timeline-service.version</name>
-    <value>1.0f</value>
-  </property>
+  <!-- Timeline Service's Configuration-->
 
   <property>
     <description>
@@ -2302,7 +1484,7 @@
 
   <property>
     <description>
-    Default maximum number of retries for timeline service client
+    Default maximum number of retires for timeline servive client
     and value -1 means no limit.
     </description>
     <name>yarn.timeline-service.client.max-retries</name>
@@ -2327,15 +1509,6 @@
   </property>
 
   <property>
-    <description>
-    The time period for which timeline v2 client will wait for draining
-    leftover entities after stop.
-    </description>
-    <name>yarn.timeline-service.client.drain-entities.timeout.ms</name>
-    <value>2000</value>
-  </property>
-
-  <property>
     <description>Enable timeline server to recover state after starting. If
     true, then yarn.timeline-service.state-store-class must be specified.
     </description>
@@ -2355,223 +1528,7 @@
     <value>${hadoop.tmp.dir}/yarn/timeline</value>
   </property>
 
-  <!-- Timeline Service v1.5 Configuration -->
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.cache-store-class</name>
-    <value>org.apache.hadoop.yarn.server.timeline.MemoryTimelineStore</value>
-    <description>Caching storage timeline server v1.5 is using. </description>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.active-dir</name>
-    <value>/tmp/entity-file-history/active</value>
-    <description>HDFS path to store active application’s timeline data</description>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.done-dir</name>
-    <value>/tmp/entity-file-history/done/</value>
-    <description>HDFS path to store done application’s timeline data</description>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.group-id-plugin-classes</name>
-    <value></value>
-    <description>
-      Plugins that can translate a timeline entity read request into
-      a list of timeline entity group ids, separated by commas.
-    </description>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.group-id-plugin-classpath</name>
-    <value></value>
-    <description>
-      Classpath for all plugins defined in
-      yarn.timeline-service.entity-group-fs-store.group-id-plugin-classes.
-    </description>
-  </property>
-
-   <property>
-     <name>yarn.timeline-service.entity-group-fs-store.summary-store</name>
-     <description>Summary storage for ATS v1.5</description>
-     <value>org.apache.hadoop.yarn.server.timeline.LeveldbTimelineStore</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.scan-interval-seconds</name>
-    <description>
-      Scan interval for ATS v1.5 entity group file system storage reader.This
-      value controls how frequent the reader will scan the HDFS active directory
-      for application status.
-    </description>
-    <value>60</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.cleaner-interval-seconds</name>
-    <description>
-      Scan interval for ATS v1.5 entity group file system storage cleaner.This
-      value controls how frequent the reader will scan the HDFS done directory
-      for stale application data.
-    </description>
-    <value>3600</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.retain-seconds</name>
-    <description>
-      How long the ATS v1.5 entity group file system storage will keep an
-      application's data in the done directory.
-    </description>
-    <value>604800</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.leveldb-cache-read-cache-size</name>
-    <description>
-      Read cache size for the leveldb cache storage in ATS v1.5 plugin storage.
-    </description>
-    <value>10485760</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.entity-group-fs-store.app-cache-size</name>
-    <description>
-      Size of the reader cache for ATS v1.5 reader. This value controls how many
-      entity groups the ATS v1.5 server should cache. If the number of active
-      read entity groups is greater than the number of caches items, some reads
-      may return empty data. This value must be greater than 0.
-    </description>
-    <value>10</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.client.fd-flush-interval-secs</name>
-    <description>
-      Flush interval for ATS v1.5 writer. This value controls how frequent
-      the writer will flush the HDFS FSStream for the entity/domain.
-    </description>
-    <value>10</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.client.fd-clean-interval-secs</name>
-    <description>
-      Scan interval for ATS v1.5 writer. This value controls how frequent
-      the writer will scan the HDFS FSStream for the entity/domain.
-      If the FSStream is stale for a long time, this FSStream will be close.
-    </description>
-    <value>60</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.client.fd-retain-secs</name>
-    <description>
-      How long the ATS v1.5 writer will keep an FSStream open.
-      If this fsstream does not write anything for this configured time,
-      it will be close.
-    </description>
-    <value>300</value>
-  </property>
-
-  <!-- Timeline Service v2 Configuration -->
-  <property>
-    <name>yarn.timeline-service.writer.class</name>
-    <description>
-      Storage implementation ATS v2 will use for the TimelineWriter service.
-    </description>
-    <value>org.apache.hadoop.yarn.server.timelineservice.storage.HBaseTimelineWriterImpl</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.reader.class</name>
-    <description>
-      Storage implementation ATS v2 will use for the TimelineReader service.
-    </description>
-    <value>org.apache.hadoop.yarn.server.timelineservice.storage.HBaseTimelineReaderImpl</value>
-  </property>
-
-  <property>
-    <name>yarn.timeline-service.client.internal-timers-ttl-secs</name>
-    <description>
-      How long the internal Timer Tasks can be alive in writer. If there is no
-      write operation for this configured time, the internal timer tasks will
-      be close.
-    </description>
-    <value>420</value>
-  </property>
-
-  <property>
-    <description>The setting that controls how often the timeline collector
-    flushes the timeline writer.</description>
-    <name>yarn.timeline-service.writer.flush-interval-seconds</name>
-    <value>60</value>
-  </property>
-
-  <property>
-    <description>Time period till which the application collector will be alive
-     in NM, after the  application master container finishes.</description>
-    <name>yarn.timeline-service.app-collector.linger-period.ms</name>
-    <value>60000</value>
-  </property>
-
-  <property>
-    <description>Time line V2 client tries to merge these many number of
-    async entities (if available) and then call the REST ATS V2 API to submit.
-    </description>
-    <name>yarn.timeline-service.timeline-client.number-of-async-entities-to-merge</name>
-    <value>10</value>
-  </property>
-
-  <property>
-    <description>
-    The setting that controls how long the final value
-    of a metric of a completed app is retained before merging into
-    the flow sum. Up to this time after an application is completed
-    out-of-order values that arrive can be recognized and discarded at the
-    cost of increased storage.
-    </description>
-    <name>yarn.timeline-service.hbase.coprocessor.app-final-value-retention-milliseconds
-    </name>
-    <value>259200000</value>
-  </property>
-
-  <property>
-    <description>
-    The default hdfs location for flowrun coprocessor jar.
-    </description>
-    <name>yarn.timeline-service.hbase.coprocessor.jar.hdfs.location
-    </name>
-    <value>/hbase/coprocessor/hadoop-yarn-server-timelineservice.jar</value>
-  </property>
-
-  <property>
-    <description>
-    The value of this parameter sets the prefix for all tables that are part of
-    timeline service in the hbase storage schema. It can be set to "dev."
-    or "staging." if it is to be used for development or staging instances.
-    This way the data in production tables stays in a separate set of tables
-    prefixed by "prod.".
-    </description>
-    <name>yarn.timeline-service.hbase-schema.prefix</name>
-    <value>prod.</value>
-  </property>
-
-  <property>
-    <description> Optional URL to an hbase-site.xml configuration file to be
-    used to connect to the timeline-service hbase cluster. If empty or not
-    specified, then the HBase configuration will be loaded from the classpath.
-    When specified the values in the specified configuration file will override
-    those from the ones that are present on the classpath.
-    </description>
-    <name>yarn.timeline-service.hbase.configuration.file
-    </name>
-    <value></value>
-  </property>
-
   <!--  Shared Cache Configuration -->
-
   <property>
     <description>Whether the shared cache is enabled</description>
     <name>yarn.sharedcache.enabled</name>
@@ -2713,253 +1670,7 @@
     <value>20</value>
   </property>
 
-  <property>
-    <description>
-    ACL protocol for use in the Timeline server.
-    </description>
-    <name>security.applicationhistory.protocol.acl</name>
-    <value></value>
-  </property>
-
-  <!-- Minicluster Configuration (for testing only!) -->
-
-  <property>
-    <description>
-    Set to true for MiniYARNCluster unit tests
-    </description>
-    <name>yarn.is.minicluster</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Set for MiniYARNCluster unit tests to control resource monitoring
-    </description>
-    <name>yarn.minicluster.control-resource-monitoring</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Set to false in order to allow MiniYARNCluster to run tests without
-    port conflicts.
-    </description>
-    <name>yarn.minicluster.fixed.ports</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Set to false in order to allow the NodeManager in MiniYARNCluster to
-    use RPC to talk to the RM.
-    </description>
-    <name>yarn.minicluster.use-rpc</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    As yarn.nodemanager.resource.memory-mb property but for the NodeManager
-    in a MiniYARNCluster.
-    </description>
-    <name>yarn.minicluster.yarn.nodemanager.resource.memory-mb</name>
-    <value>4096</value>
-  </property>
-
-  <!-- Node Labels Configuration -->
-
-  <property>
-    <description>
-    Enable node labels feature
-    </description>
-    <name>yarn.node-labels.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    URI for NodeLabelManager.  The default value is
-    /tmp/hadoop-yarn-${user}/node-labels/ in the local filesystem.
-    </description>
-    <name>yarn.node-labels.fs-store.root-dir</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Set configuration type for node labels. Administrators can specify
-    "centralized", "delegated-centralized" or "distributed".
-    </description>
-    <name>yarn.node-labels.configuration-type</name>
-    <value>centralized</value>
-  </property>
-
-  <!-- Distributed Node Labels Configuration -->
-  <property>
-    <description>
-    When "yarn.node-labels.configuration-type" is configured with "distributed"
-    in RM, Administrators can configure in NM the provider for the
-    node labels by configuring this parameter. Administrators can
-    configure "config", "script" or the class name of the provider. Configured
-    class needs to extend
-    org.apache.hadoop.yarn.server.nodemanager.nodelabels.NodeLabelsProvider.
-    If "config" is configured, then "ConfigurationNodeLabelsProvider" and if
-    "script" is configured, then "ScriptNodeLabelsProvider" will be used.
-    </description>
-    <name>yarn.nodemanager.node-labels.provider</name>
-  </property>
-
-  <property>
-    <description>
-    When "yarn.nodemanager.node-labels.provider" is configured with "config",
-    "Script" or the configured class extends AbstractNodeLabelsProvider, then
-    periodically node labels are retrieved from the node labels provider. This
-    configuration is to define the interval period.
-    If -1 is configured then node labels are retrieved from provider only
-    during initialization. Defaults to 10 mins.
-    </description>
-    <name>yarn.nodemanager.node-labels.provider.fetch-interval-ms</name>
-    <value>600000</value>
-  </property>
-
-  <property>
-    <description>
-   Interval at which NM syncs its node labels with RM. NM will send its loaded
-   labels every x intervals configured, along with heartbeat to RM.
-    </description>
-    <name>yarn.nodemanager.node-labels.resync-interval-ms</name>
-    <value>120000</value>
-  </property>
-
-  <property>
-    <description>
-    When "yarn.nodemanager.node-labels.provider" is configured with "config"
-    then ConfigurationNodeLabelsProvider fetches the partition label from this
-    parameter.
-    </description>
-    <name>yarn.nodemanager.node-labels.provider.configured-node-partition</name>
-  </property>
-
-  <property>
-    <description>
-    When "yarn.nodemanager.node-labels.provider" is configured with "Script"
-    then this configuration provides the timeout period after which it will
-    interrupt the script which queries the Node labels. Defaults to 20 mins.
-    </description>
-    <name>yarn.nodemanager.node-labels.provider.fetch-timeout-ms</name>
-    <value>1200000</value>
-  </property>
-
-  <!-- Delegated-centralized Node Labels Configuration -->
-  <property>
-    <description>
-    When node labels "yarn.node-labels.configuration-type" is
-    of type "delegated-centralized", administrators should configure
-    the class for fetching node labels by ResourceManager. Configured
-    class needs to extend
-    org.apache.hadoop.yarn.server.resourcemanager.nodelabels.
-    RMNodeLabelsMappingProvider.
-    </description>
-    <name>yarn.resourcemanager.node-labels.provider</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    When "yarn.node-labels.configuration-type" is configured with
-    "delegated-centralized", then periodically node labels are retrieved
-    from the node labels provider. This configuration is to define the
-    interval. If -1 is configured then node labels are retrieved from
-    provider only once for each node after it registers. Defaults to 30 mins.
-    </description>
-    <name>yarn.resourcemanager.node-labels.provider.fetch-interval-ms</name>
-    <value>1800000</value>
-  </property>
-
-  <property>
-    <description>
-    Timeout in seconds for YARN node graceful decommission.
-    This is the maximal time to wait for running containers and applications to complete
-    before transition a DECOMMISSIONING node into DECOMMISSIONED.
-    </description>
-    <name>yarn.resourcemanager.nodemanager-graceful-decommission-timeout-secs</name>
-    <value>3600</value>
-  </property>
-
-  <property>
-    <description>
-    Timeout in seconds of DecommissioningNodesWatcher internal polling.
-    </description>
-    <name>yarn.resourcemanager.decommissioning-nodes-watcher.poll-interval-secs</name>
-    <value>20</value>
-  </property>
-
-  <property>
-    <description>The Node Label script to run. Script output Line starting with
-     "NODE_PARTITION:" will be considered as Node Label Partition. In case of
-     multiple lines have this pattern, then last one will be considered
-    </description>
-    <name>yarn.nodemanager.node-labels.provider.script.path</name>
-  </property>
-
-  <property>
-    <description>The arguments to pass to the Node label script.</description>
-    <name>yarn.nodemanager.node-labels.provider.script.opts</name>
-  </property>
-
-  <!-- Federation Configuration -->
-  <property>
-    <description>
-      Flag to indicate whether the RM is participating in Federation or not.
-    </description>
-    <name>yarn.federation.enabled</name>
-    <value>false</value>
-  </property>
-  <property>
-    <description>
-      Machine list file to be loaded by the FederationSubCluster Resolver
-    </description>
-    <name>yarn.federation.machine-list</name>
-  </property>
-  <property>
-    <description>
-      Class name for SubClusterResolver
-    </description>
-    <name>yarn.federation.subcluster-resolver.class</name>
-    <value>org.apache.hadoop.yarn.server.federation.resolver.DefaultSubClusterResolverImpl</value>
-  </property>
-
-  <property>
-    <description>
-      Store class name for federation state store
-    </description>
-    <name>yarn.federation.state-store.class</name>
-    <value>org.apache.hadoop.yarn.server.federation.store.impl.MemoryFederationStateStore</value>
-  </property>
-
-  <property>
-   <description>
-    The time in seconds after which the federation state store local cache
-    will be refreshed periodically
-   </description>
-   <name>yarn.federation.cache-ttl.secs</name>
-   <value>300</value>
-  </property>
-
-  <property>
-    <description>The registry base directory for federation.</description>
-    <name>yarn.federation.registry.base-dir</name>
-    <value>yarnfederation/</value>
-  </property>
-
-  <!-- Other Configuration -->
-
-  <property>
-    <description>The registry implementation to use.</description>
-    <name>yarn.registry.class</name>
-    <value>org.apache.hadoop.registry.client.impl.FSRegistryOperationsService</value>
-  </property>
-
+  <!-- Other configuration -->
   <property>
     <description>The interval that the yarn client library uses to poll the
     completion status of the asynchronous API of application client protocol.
@@ -2969,16 +1680,7 @@
   </property>
 
   <property>
-    <description>
-    The duration (in ms) the YARN client waits for an expected state change
-    to occur.  -1 means unlimited wait time.
-    </description>
-    <name>yarn.client.application-client-protocol.poll-timeout-ms</name>
-    <value>-1</value>
-  </property>
-
-  <property>
-    <description>RSS usage of a process computed via
+    <description>RSS usage of a process computed via 
     /proc/pid/stat is not very accurate as it includes shared pages of a
     process. /proc/pid/smaps provides useful information like
     Private_Dirty, Private_Clean, Shared_Dirty, Shared_Clean which can be used
@@ -2988,38 +1690,6 @@
     </description>
     <name>yarn.nodemanager.container-monitor.procfs-tree.smaps-based-rss.enabled</name>
     <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    URL for log aggregation server
-    </description>
-    <name>yarn.log.server.url</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    URL for log aggregation server web service
-    </description>
-    <name>yarn.log.server.web-service.url</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    RM Application Tracking URL
-    </description>
-    <name>yarn.tracking.url.generator</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Class to be used for YarnAuthorizationProvider
-    </description>
-    <name>yarn.authorization-provider</name>
-    <value></value>
   </property>
 
   <property>
@@ -3034,766 +1704,10 @@
   </property>
 
   <property>
-    <description>Define how many aggregated log files per application per NM
-    we can have in remote file system. By default, the total number of
-    aggregated log files per application per NM is 30.
-    </description>
-    <name>yarn.nodemanager.log-aggregation.num-log-files-per-app</name>
-    <value>30</value>
-  </property>
-
-  <property>
-    <description>
-    Enable/disable intermediate-data encryption at YARN level. For now,
-    this only is used by the FileSystemRMStateStore to setup right
-    file-system security attributes.
-    </description>
-    <name>yarn.intermediate-data-encryption.enable</name>
-    <value>false</value>
-  </property>
-
-  <property>
     <description>Flag to enable cross-origin (CORS) support in the NM. This flag
     requires the CORS filter initializer to be added to the filter initializers
     list in core-site.xml.</description>
     <name>yarn.nodemanager.webapp.cross-origin.enabled</name>
     <value>false</value>
   </property>
-
-  <property>
-    <description>
-    Defines maximum application priority in a cluster.
-    If an application is submitted with a priority higher than this value, it will be
-    reset to this maximum value.
-    </description>
-    <name>yarn.cluster.max-application-priority</name>
-    <value>0</value>
-  </property>
-
-  <property>
-    <description>
-    The default log aggregation policy class. Applications can
-    override it via LogAggregationContext. This configuration can provide
-    some cluster-side default behavior so that if the application doesn't
-    specify any policy via LogAggregationContext administrators of the cluster
-    can adjust the policy globally.
-    </description>
-    <name>yarn.nodemanager.log-aggregation.policy.class</name>
-    <value>org.apache.hadoop.yarn.server.nodemanager.containermanager.logaggregation.AllContainerLogAggregationPolicy</value>
-  </property>
-
-  <property>
-    <description>
-    The default parameters for the log aggregation policy. Applications can
-    override it via LogAggregationContext. This configuration can provide
-    some cluster-side default behavior so that if the application doesn't
-    specify any policy via LogAggregationContext administrators of the cluster
-    can adjust the policy globally.
-    </description>
-    <name>yarn.nodemanager.log-aggregation.policy.parameters</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Enable/Disable AMRMProxyService in the node manager. This service is used to
-    intercept calls from the application masters to the resource manager.
-    </description>
-    <name>yarn.nodemanager.amrmproxy.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    The address of the AMRMProxyService listener.
-    </description>
-    <name>yarn.nodemanager.amrmproxy.address</name>
-    <value>0.0.0.0:8049</value>
-  </property>
-
-  <property>
-    <description>
-    The number of threads used to handle requests by the AMRMProxyService.
-    </description>
-    <name>yarn.nodemanager.amrmproxy.client.thread-count</name>
-    <value>25</value>
-  </property>
-
-  <property>
-    <description>
-    The comma separated list of class names that implement the
-    RequestInterceptor interface. This is used by the AMRMProxyService to create
-    the request processing pipeline for applications.
-    </description>
-    <name>yarn.nodemanager.amrmproxy.interceptor-class.pipeline</name>
-    <value>org.apache.hadoop.yarn.server.nodemanager.amrmproxy.DefaultRequestInterceptor</value>
-  </property>
-
-  <property>
-    <description>
-    Whether AMRMProxy HA is enabled.
-    </description>
-    <name>yarn.nodemanager.amrmproxy.ha.enable</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Setting that controls whether distributed scheduling is enabled.
-    </description>
-    <name>yarn.nodemanager.distributed-scheduling.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      Setting that controls whether opportunistic container allocation
-      is enabled.
-    </description>
-    <name>yarn.resourcemanager.opportunistic-container-allocation.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Number of nodes to be used by the Opportunistic Container Allocator for
-    dispatching containers during container allocation.
-    </description>
-    <name>yarn.resourcemanager.opportunistic-container-allocation.nodes-used</name>
-    <value>10</value>
-  </property>
-
-  <property>
-    <description>
-    Frequency for computing least loaded NMs.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.sorting-nodes-interval-ms</name>
-    <value>1000</value>
-  </property>
-
-  <property>
-    <description>
-    Comparator for determining node load for Distributed Scheduling.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.load-comparator</name>
-    <value>QUEUE_LENGTH</value>
-  </property>
-
-  <property>
-    <description>
-    Value of standard deviation used for calculation of queue limit thresholds.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.queue-limit-stdev</name>
-    <value>1.0f</value>
-  </property>
-
-  <property>
-    <description>
-    Min length of container queue at NodeManager.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.min-queue-length</name>
-    <value>5</value>
-  </property>
-
-  <property>
-    <description>
-    Max length of container queue at NodeManager.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.max-queue-length</name>
-    <value>15</value>
-  </property>
-
-  <property>
-    <description>
-    Min queue wait time for a container at a NodeManager.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.min-queue-wait-time-ms</name>
-    <value>10</value>
-  </property>
-
-  <property>
-    <description>
-    Max queue wait time for a container queue at a NodeManager.
-    </description>
-    <name>yarn.resourcemanager.nm-container-queuing.max-queue-wait-time-ms</name>
-    <value>100</value>
-  </property>
-
-  <property>
-    <description>
-    Use container pause as the preemption policy over kill in the container
-    queue at a NodeManager.
-    </description>
-    <name>yarn.nodemanager.opportunistic-containers-use-pause-for-preemption</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Error filename pattern, to identify the file in the container's
-    Log directory which contain the container's error log. As error file
-    redirection is done by client/AM and yarn will not be aware of the error
-    file name. YARN uses this pattern to identify the error file and tail
-    the error log as diagnostics when the container execution returns non zero
-    value. Filename patterns are case sensitive and should match the
-    specifications of FileSystem.globStatus(Path) api. If multiple filenames
-    matches the pattern, first file matching the pattern will be picked.
-    </description>
-    <name>yarn.nodemanager.container.stderr.pattern</name>
-    <value>{*stderr*,*STDERR*}</value>
-  </property>
-
-  <property>
-    <description>
-    Size of the container error file which needs to be tailed, in bytes.
-    </description>
-    <name>yarn.nodemanager.container.stderr.tail.bytes </name>
-    <value>4096</value>
-  </property>
-
-  <property>
-    <description>
-    Choose different implementation of node label's storage
-    </description>
-    <name>yarn.node-labels.fs-store.impl.class</name>
-    <value>org.apache.hadoop.yarn.nodelabels.FileSystemNodeLabelsStore</value>
-  </property>
-
-  <property>
-    <description>
-      Enable the CSRF filter for the RM web app
-    </description>
-    <name>yarn.resourcemanager.webapp.rest-csrf.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the custom header name to use for CSRF
-      protection.
-    </description>
-    <name>yarn.resourcemanager.webapp.rest-csrf.custom-header</name>
-    <value>X-XSRF-Header</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the list of HTTP methods that do not
-      require CSRF protection
-    </description>
-    <name>yarn.resourcemanager.webapp.rest-csrf.methods-to-ignore</name>
-    <value>GET,OPTIONS,HEAD</value>
-  </property>
-
-  <property>
-    <description>
-      Enable the CSRF filter for the NM web app
-    </description>
-    <name>yarn.nodemanager.webapp.rest-csrf.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the custom header name to use for CSRF
-      protection.
-    </description>
-    <name>yarn.nodemanager.webapp.rest-csrf.custom-header</name>
-    <value>X-XSRF-Header</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the list of HTTP methods that do not
-      require CSRF protection
-    </description>
-    <name>yarn.nodemanager.webapp.rest-csrf.methods-to-ignore</name>
-    <value>GET,OPTIONS,HEAD</value>
-  </property>
-
-  <property>
-    <description>
-      The name of disk validator.
-    </description>
-    <name>yarn.nodemanager.disk-validator</name>
-    <value>basic</value>
-  </property>
-
-  <property>
-  <description>
-      Enable the CSRF filter for the timeline service web app
-    </description>
-    <name>yarn.timeline-service.webapp.rest-csrf.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the custom header name to use for CSRF
-      protection.
-    </description>
-    <name>yarn.timeline-service.webapp.rest-csrf.custom-header</name>
-    <value>X-XSRF-Header</value>
-  </property>
-
-  <property>
-    <description>
-      Optional parameter that indicates the list of HTTP methods that do not
-      require CSRF protection
-    </description>
-    <name>yarn.timeline-service.webapp.rest-csrf.methods-to-ignore</name>
-    <value>GET,OPTIONS,HEAD</value>
-  </property>
-
-  <property>
-    <description>
-      Enable the XFS filter for YARN
-    </description>
-    <name>yarn.webapp.xfs-filter.enabled</name>
-    <value>true</value>
-  </property>
-
-  <property>
-    <description>
-      Property specifying the xframe options value.
-    </description>
-    <name>yarn.resourcemanager.webapp.xfs-filter.xframe-options</name>
-    <value>SAMEORIGIN</value>
-  </property>
-
-  <property>
-    <description>
-      Property specifying the xframe options value.
-    </description>
-    <name>yarn.nodemanager.webapp.xfs-filter.xframe-options</name>
-    <value>SAMEORIGIN</value>
-  </property>
-
-  <property>
-    <description>
-      Property specifying the xframe options value.
-    </description>
-    <name>yarn.timeline-service.webapp.xfs-filter.xframe-options</name>
-    <value>SAMEORIGIN</value>
-  </property>
-
-  <property>
-    <description>
-    The least amount of time(msec.) an inactive (decommissioned or shutdown) node can
-    stay in the nodes list of the resourcemanager after being declared untracked.
-    A node is marked untracked if and only if it is absent from both include and
-    exclude nodemanager lists on the RM. All inactive nodes are checked twice per
-    timeout interval or every 10 minutes, whichever is lesser, and marked appropriately.
-    The same is done when refreshNodes command (graceful or otherwise) is invoked.
-    </description>
-    <name>yarn.resourcemanager.node-removal-untracked.timeout-ms</name>
-    <value>60000</value>
-  </property>
-
-  <property>
-    <description>
-    The RMAppLifetimeMonitor Service uses this value as monitor interval
-    </description>
-    <name>yarn.resourcemanager.application-timeouts.monitor.interval-ms</name>
-    <value>3000</value>
-  </property>
-
-  <property>
-    <description>
-      Defines the limit of the diagnostics message of an application
-      attempt, in kilo characters (character count * 1024).
-      When using ZooKeeper to store application state behavior, it's
-      important to limit the size of the diagnostic messages to
-      prevent YARN from overwhelming ZooKeeper. In cases where
-      yarn.resourcemanager.state-store.max-completed-applications is set to
-      a large number, it may be desirable to reduce the value of this property
-      to limit the total data stored.
-    </description>
-    <name>yarn.app.attempt.diagnostics.limit.kc</name>
-    <value>64</value>
-  </property>
-
-  <property>
-    <description>
-      Flag to enable cross-origin (CORS) support for timeline service v1.x or
-      Timeline Reader in timeline service v2. For timeline service v2, also add
-      org.apache.hadoop.security.HttpCrossOriginFilterInitializer to the
-      configuration hadoop.http.filter.initializers in core-site.xml.
-    </description>
-    <name>yarn.timeline-service.http-cross-origin.enabled</name>
-    <value>false</value>
-  </property>
- 
-  <property>
-    <description>
-      Flag to enable cross-origin (CORS) support for timeline service v1.x or
-      Timeline Reader in timeline service v2. For timeline service v2, also add
-      org.apache.hadoop.security.HttpCrossOriginFilterInitializer to the
-      configuration hadoop.http.filter.initializers in core-site.xml.
-    </description>
-    <name>yarn.timeline-service.http-cross-origin.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      The comma separated list of class names that implement the
-      RequestInterceptor interface. This is used by the RouterClientRMService
-      to create the request processing pipeline for users.
-    </description>
-    <name>yarn.router.clientrm.interceptor-class.pipeline</name>
-    <value>org.apache.hadoop.yarn.server.router.clientrm.DefaultClientRequestInterceptor</value>
-  </property>
-
-  <property>
-    <description>
-      Size of LRU cache for Router ClientRM Service and RMAdmin Service.
-    </description>
-    <name>yarn.router.pipeline.cache-max-size</name>
-    <value>25</value>
-  </property>
-
-  <property>
-    <description>
-      The comma separated list of class names that implement the
-      RequestInterceptor interface. This is used by the RouterRMAdminService
-      to create the request processing pipeline for users.
-    </description>
-    <name>yarn.router.rmadmin.interceptor-class.pipeline</name>
-    <value>org.apache.hadoop.yarn.server.router.rmadmin.DefaultRMAdminRequestInterceptor</value>
-  </property>
-
-  <property>
-    <description>
-      The actual address the server will bind to. If this optional address is
-      set, the RPC and webapp servers will bind to this address and the port specified in
-      yarn.router.address and yarn.router.webapp.address, respectively. This is
-      most useful for making Router listen to all interfaces by setting to 0.0.0.0.
-    </description>
-    <name>yarn.router.bind-host</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Comma-separated list of PlacementRules to determine how applications
-      submitted by certain users get mapped to certain queues. Default is
-      user-group, which corresponds to UserGroupMappingPlacementRule.
-    </description>
-    <name>yarn.scheduler.queue-placement-rules</name>
-    <value>user-group</value>
-  </property>
-
-  <property>
-    <description>
-      The comma separated list of class names that implement the
-      RequestInterceptor interface. This is used by the RouterWebServices
-      to create the request processing pipeline for users.
-    </description>
-    <name>yarn.router.webapp.interceptor-class.pipeline</name>
-    <value>org.apache.hadoop.yarn.server.router.webapp.DefaultRequestInterceptorREST</value>
-  </property>
-
-  <property>
-    <description>
-      The http address of the Router web application.
-      If only a host is provided as the value,
-      the webapp will be served on a random port.
-    </description>
-    <name>yarn.router.webapp.address</name>
-    <value>0.0.0.0:8089</value>
-  </property>
-
-  <property>
-    <description>
-      The https address of the Router web application.
-      If only a host is provided as the value,
-      the webapp will be served on a random port.
-    </description>
-    <name> yarn.router.webapp.https.address</name>
-    <value>0.0.0.0:8091</value>
-  </property>
-
-  <property>
-    <description>
-       It is TimelineClient 1.5 configuration whether to store active
-       application’s timeline data with in user directory i.e
-       ${yarn.timeline-service.entity-group-fs-store.active-dir}/${user.name}
-    </description>
-    <name>yarn.timeline-service.entity-group-fs-store.with-user-dir</name>
-    <value>false</value>
-  </property>
-
-  <!-- resource types configuration -->
-  <property>
-    <name>yarn.resource-types</name>
-    <value></value>
-    <description>
-    The resource types to be used for scheduling. Use resource-types.xml
-    to specify details about the individual resource types.
-    </description>
-  </property>
- 
-  <property>
-    <name>yarn.webapp.filter-entity-list-by-user</name>
-    <value>false</value>
-      <description>
-        Flag to enable display of applications per user as an admin
-        configuration.
-      </description>
-  </property>
-
-  <property>
-    <description>
-      The type of configuration store to use for scheduler configurations.
-      Default is "file", which uses file based capacity-scheduler.xml to
-      retrieve and change scheduler configuration. To enable API based
-      scheduler configuration, use either "memory" (in memory storage, no
-      persistence across restarts), "leveldb" (leveldb based storage), or
-      "zk" (zookeeper based storage). API based configuration is only useful
-      when using a scheduler which supports mutable configuration. Currently
-      only capacity scheduler supports this.
-    </description>
-    <name>yarn.scheduler.configuration.store.class</name>
-    <value>file</value>
-  </property>
-
-  <property>
-    <description>
-      The class to use for configuration mutation ACL policy if using a mutable
-      configuration provider. Controls whether a mutation request is allowed.
-      The DefaultConfigurationMutationACLPolicy checks if the requestor is a
-      YARN admin.
-    </description>
-    <name>yarn.scheduler.configuration.mutation.acl-policy.class</name>
-    <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.DefaultConfigurationMutationACLPolicy</value>
-  </property>
-
-  <property>
-    <description>
-      The storage path for LevelDB implementation of configuration store,
-      when yarn.scheduler.configuration.store.class is configured to be
-      "leveldb".
-    </description>
-    <name>yarn.scheduler.configuration.leveldb-store.path</name>
-    <value>${hadoop.tmp.dir}/yarn/system/confstore</value>
-  </property>
-
-  <property>
-    <description>
-      The compaction interval for LevelDB configuration store in secs,
-      when yarn.scheduler.configuration.store.class is configured to be
-      "leveldb". Default is one day.
-    </description>
-    <name>yarn.scheduler.configuration.leveldb-store.compaction-interval-secs</name>
-    <value>86400</value>
-  </property>
-
-  <property>
-    <description>
-      The max number of configuration change log entries kept in config
-      store, when yarn.scheduler.configuration.store.class is configured to be
-      "leveldb" or "zk". Default is 1000 for either.
-    </description>
-    <name>yarn.scheduler.configuration.store.max-logs</name>
-    <value>1000</value>
-  </property>
-
-  <property>
-    <description>
-      ZK root node path for configuration store when using zookeeper-based
-      configuration store.
-    </description>
-    <name>yarn.scheduler.configuration.zk-store.parent-path</name>
-    <value>/confstore</value>
-  </property>
-
-  <property>
-    <description>
-      Provides an option for client to load supported resource types from RM
-      instead of depending on local resource-types.xml file.
-    </description>
-    <name>yarn.client.load.resource-types.from-server</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-      When yarn.nodemanager.resource.gpu.allowed-gpu-devices=auto specified,
-      YARN NodeManager needs to run GPU discovery binary (now only support
-      nvidia-smi) to get GPU-related information.
-      When value is empty (default), YARN NodeManager will try to locate
-      discovery executable itself.
-      An example of the config value is: /usr/local/bin/nvidia-smi
-    </description>
-    <name>yarn.nodemanager.resource-plugins.gpu.path-to-discovery-executables</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Enable additional discovery/isolation of resources on the NodeManager,
-      split by comma. By default, this is empty.
-      Acceptable values: { "yarn.io/gpu", "yarn.io/fpga"}.
-    </description>
-    <name>yarn.nodemanager.resource-plugins</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Specify GPU devices which can be managed by YARN NodeManager, split by comma
-      Number of GPU devices will be reported to RM to make scheduling decisions.
-      Set to auto (default) let YARN automatically discover GPU resource from
-      system.
-
-      Manually specify GPU devices if auto detect GPU device failed or admin
-      only want subset of GPU devices managed by YARN. GPU device is identified
-      by their minor device number and index. A common approach to get minor
-      device number of GPUs is using "nvidia-smi -q" and search "Minor Number"
-      output.
-
-      When manual specify minor numbers, admin needs to include indice of GPUs
-      as well, format is index:minor_number[,index:minor_number...]. An example
-      of manual specification is "0:0,1:1,2:2,3:4" to allow YARN NodeManager to
-      manage GPU devices with indice 0/1/2/3 and minor number 0/1/2/4.
-      numbers .
-    </description>
-    <name>yarn.nodemanager.resource-plugins.gpu.allowed-gpu-devices</name>
-    <value>auto</value>
-  </property>
-
-  <property>
-    <description>
-      Specify docker command plugin for GPU. By default uses Nvidia docker V1.
-    </description>
-    <name>yarn.nodemanager.resource-plugins.gpu.docker-plugin</name>
-    <value>nvidia-docker-v1</value>
-  </property>
-
-  <property>
-    <description>
-      Specify end point of nvidia-docker-plugin.
-      Please find documentation: https://github.com/NVIDIA/nvidia-docker/wiki
-      For more details.
-    </description>
-    <name>yarn.nodemanager.resource-plugins.gpu.docker-plugin.nvidia-docker-v1.endpoint</name>
-    <value>http://localhost:3476/v1.0/docker/cli</value>
-  </property>
-
-  <property>
-    <description>
-      Specify one vendor plugin to handle FPGA devices discovery/IP download/configure.
-      Only IntelFpgaOpenclPlugin is supported by default.
-      We only allow one NM configured with one vendor FPGA plugin now since the end user can put the same
-      vendor's cards in one host. And this also simplify our design.
-    </description>
-    <name>yarn.nodemanager.resource-plugins.fpga.vendor-plugin.class</name>
-    <value>org.apache.hadoop.yarn.server.nodemanager.containermanager.resourceplugin.fpga.IntelFpgaOpenclPlugin</value>
-  </property>
-
-  <property>
-    <description>
-      When yarn.nodemanager.resource.fpga.allowed-fpga-devices=auto specified,
-      YARN NodeManager needs to run FPGA discovery binary (now only support
-      IntelFpgaOpenclPlugin) to get FPGA information.
-      When value is empty (default), YARN NodeManager will try to locate
-      discovery executable from vendor plugin's preference
-    </description>
-    <name>yarn.nodemanager.resource-plugins.fpga.path-to-discovery-executables</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-      Specify FPGA devices which can be managed by YARN NodeManager, split by comma
-      Number of FPGA devices will be reported to RM to make scheduling decisions.
-      Set to auto (default) let YARN automatically discover FPGA resource from
-      system.
-
-      Manually specify FPGA devices if admin only want subset of FPGA devices managed by YARN.
-      At present, since we can only configure one major number in c-e.cfg, FPGA device is
-      identified by their minor device number. A common approach to get minor
-      device number of FPGA is using "aocl diagnose" and check uevent with device name.
-      A sample manual value for this is like "0,1"
-    </description>
-    <name>yarn.nodemanager.resource-plugins.fpga.allowed-fpga-devices</name>
-    <value>auto</value>
-  </property>
-
-  <property>
-    <description>The http address of the timeline reader web application.</description>
-    <name>yarn.timeline-service.reader.webapp.address</name>
-    <value>${yarn.timeline-service.webapp.address}</value>
-  </property>
-
-  <property>
-    <description>The https address of the timeline reader web application.</description>
-    <name>yarn.timeline-service.reader.webapp.https.address</name>
-    <value>${yarn.timeline-service.webapp.https.address}</value>
-  </property>
-
-  <property>
-    <description>
-      The actual address timeline reader will bind to. If this optional address is
-      set, the reader server will bind to this address and the port specified in
-      yarn.timeline-service.reader.webapp.address.
-      This is most useful for making the service listen to all interfaces by setting to
-      0.0.0.0.
-    </description>
-    <name>yarn.timeline-service.reader.bind-host</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    Whether to enable the NUMA awareness for containers in Node Manager.
-    </description>
-    <name>yarn.nodemanager.numa-awareness.enabled</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    Whether to read the NUMA topology from the system or from the
-    configurations. If the value is true then NM reads the NUMA topology from
-    system using the command 'numactl --hardware'. If the value is false then NM
-    reads the topology from the configurations
-    'yarn.nodemanager.numa-awareness.node-ids'(for node id's),
-    'yarn.nodemanager.numa-awareness.&lt;NODE_ID&gt;.memory'(for each node memory),
-    'yarn.nodemanager.numa-awareness.&lt;NODE_ID&gt;.cpus'(for each node cpus).
-    </description>
-    <name>yarn.nodemanager.numa-awareness.read-topology</name>
-    <value>false</value>
-  </property>
-
-  <property>
-    <description>
-    NUMA node id's in the form of comma separated list. Memory and No of CPUs
-    will be read using the properties
-    'yarn.nodemanager.numa-awareness.&lt;NODE_ID&gt;.memory' and
-    'yarn.nodemanager.numa-awareness.&lt;NODE_ID&gt;.cpus' for each id specified
-    in this value. This property value will be read only when
-    'yarn.nodemanager.numa-awareness.read-topology=false'.
-
-    For example, if yarn.nodemanager.numa-awareness.node-ids=0,1
-    then need to specify memory and cpus for node id's '0' and '1' like below,
-    yarn.nodemanager.numa-awareness.0.memory=73717
-    yarn.nodemanager.numa-awareness.0.cpus=4
-    yarn.nodemanager.numa-awareness.1.memory=73727
-    yarn.nodemanager.numa-awareness.1.cpus=4
-    </description>
-    <name>yarn.nodemanager.numa-awareness.node-ids</name>
-    <value></value>
-  </property>
-
-  <property>
-    <description>
-    The numactl command path which controls NUMA policy for processes or
-    shared memory.
-    </description>
-    <name>yarn.nodemanager.numa-awareness.numactl.cmd</name>
-    <value>/usr/bin/numactl</value>
-  </property>
-
 </configuration>

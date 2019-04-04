@@ -15,39 +15,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Run as root to stop secure datanodes in a security-enabled cluster.
+# Run as root to start secure datanodes in a security-enabled cluster.
 
-## @description  usage info
-## @audience     private
-## @stability    evolving
-## @replaceable  no
-function hadoop_usage()
-{
-  echo "Usage: stop-secure-dns.sh"
-}
+usage="Usage (run as root in order to stop secure datanodes): stop-secure-dns.sh"
 
-this="${BASH_SOURCE-$0}"
-bin=$(cd -P -- "$(dirname -- "${this}")" >/dev/null && pwd -P)
+bin=`dirname "${BASH_SOURCE-$0}"`
+bin=`cd "$bin"; pwd`
 
-# let's locate libexec...
-if [[ -n "${HADOOP_HOME}" ]]; then
-  HADOOP_DEFAULT_LIBEXEC_DIR="${HADOOP_HOME}/libexec"
+DEFAULT_LIBEXEC_DIR="$bin"/../libexec
+HADOOP_LIBEXEC_DIR=${HADOOP_LIBEXEC_DIR:-$DEFAULT_LIBEXEC_DIR}
+. $HADOOP_LIBEXEC_DIR/hdfs-config.sh
+
+if [ "$EUID" -eq 0 ] && [ -n "$HADOOP_SECURE_DN_USER" ]; then
+  "$HADOOP_PREFIX"/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script "$bin"/hdfs stop datanode
 else
-  HADOOP_DEFAULT_LIBEXEC_DIR="${bin}/../libexec"
+  echo $usage
 fi
-
-HADOOP_LIBEXEC_DIR="${HADOOP_LIBEXEC_DIR:-$HADOOP_DEFAULT_LIBEXEC_DIR}"
-# shellcheck disable=SC2034
-HADOOP_NEW_CONFIG=true
-if [[ -f "${HADOOP_LIBEXEC_DIR}/hdfs-config.sh" ]]; then
-  . "${HADOOP_LIBEXEC_DIR}/hdfs-config.sh"
-else
-  echo "ERROR: Cannot execute ${HADOOP_LIBEXEC_DIR}/hdfs-config.sh." 2>&1
-  exit 1
-fi
-
-hadoop_uservar_su hdfs datanode "${HADOOP_HDFS_HOME}/bin/hdfs" \
-  --workers \
-  --config "${HADOOP_CONF_DIR}" \
-  --daemon stop \
-  datanode

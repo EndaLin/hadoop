@@ -130,10 +130,6 @@ if "%1" == "--loglevel" (
     set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\yarn-server\yarn-server-applicationhistoryservice\target\classes
   )
 
-  if exist %HADOOP_YARN_HOME%\yarn-server\yarn-server-router\target\classes (
-    set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\yarn-server\yarn-server-router\target\classes
-  )
-
   if exist %HADOOP_YARN_HOME%\build\test\classes (
     set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\build\test\classes
   )
@@ -147,15 +143,15 @@ if "%1" == "--loglevel" (
 
   if %yarn-command% == classpath (
     if not defined yarn-command-arguments (
-      @rem No need to bother starting up a JVM for this simple case.
+      @rem No need to bother starting up a JVM for this simple case. 
       @echo %CLASSPATH%
       exit /b
     )
   )
 
   set yarncommands=resourcemanager nodemanager proxyserver rmadmin version jar ^
-     application applicationattempt container node queue logs daemonlog historyserver ^
-     timelineserver timelinereader router classpath
+     application applicationattempt cluster container node queue logs daemonlog historyserver ^
+     timelineserver classpath
   for %%i in ( %yarncommands% ) do (
     if %yarn-command% == %%i set yarncommand=true
   )
@@ -176,7 +172,7 @@ if "%1" == "--loglevel" (
 goto :eof
 
 :classpath
-  set CLASS=org.apache.hadoop.util.Classpath
+  set CLASS=org.apache.hadoop.util.Classpath 
   goto :eof
 
 :rmadmin
@@ -219,8 +215,6 @@ goto :eof
 
 :resourcemanager
   set CLASSPATH=%CLASSPATH%;%YARN_CONF_DIR%\rm-config\log4j.properties
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\*
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\lib\*
   set CLASS=org.apache.hadoop.yarn.server.resourcemanager.ResourceManager
   set YARN_OPTS=%YARN_OPTS% %YARN_RESOURCEMANAGER_OPTS%
   if defined YARN_RESOURCEMANAGER_HEAPSIZE (
@@ -248,24 +242,8 @@ goto :eof
   )
   goto :eof
 
-:timelinereader
-  set CLASSPATH=%CLASSPATH%;%YARN_CONF_DIR%\timelineserver-config\log4j.properties
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\*
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\lib\*
-  set CLASS=org.apache.hadoop.yarn.server.timelineservice.reader.TimelineReaderServer
-  set YARN_OPTS=%YARN_OPTS% %YARN_TIMELINEREADER_OPTS%
-  goto :eof
-
-:router
-  set CLASSPATH=%CLASSPATH%;%YARN_CONF_DIR%\router-config\log4j.properties
-  set CLASS=org.apache.hadoop.yarn.server.router.Router
-  set YARN_OPTS=%YARN_OPTS% %HADOOP_ROUTER_OPTS%
-  goto :eof
-
 :nodemanager
   set CLASSPATH=%CLASSPATH%;%YARN_CONF_DIR%\nm-config\log4j.properties
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\*
-  set CLASSPATH=%CLASSPATH%;%HADOOP_YARN_HOME%\%YARN_DIR%\timelineservice\lib\*
   set CLASS=org.apache.hadoop.yarn.server.nodemanager.NodeManager
   set YARN_OPTS=%YARN_OPTS% -server %HADOOP_NODEMANAGER_OPTS%
   if defined YARN_NODEMANAGER_HEAPSIZE (
@@ -301,11 +279,6 @@ goto :eof
   set YARN_OPTS=%YARN_OPTS% %YARN_CLIENT_OPTS%
   goto :eof
 
-:schedulerconf
-  set CLASS=org.apache.hadoop.yarn.client.cli.SchedConfCLI
-  set YARN_OPTS=%YARN_OPTS% %YARN_CLIENT_OPTS%
-  goto :eof
-
 @rem This changes %1, %2 etc. Hence those cannot be used after calling this.
 :make_command_arguments
   if "%1" == "--config" (
@@ -338,9 +311,7 @@ goto :eof
   @echo        where COMMAND is one of:
   @echo   resourcemanager      run the ResourceManager
   @echo   nodemanager          run a nodemanager on each slave
-  @echo   router               run the Router daemon
   @echo   timelineserver       run the timeline server
-  @echo   timelinereader       run the timeline reader server
   @echo   rmadmin              admin tools
   @echo   version              print the version
   @echo   jar ^<jar^>          run a jar file
@@ -351,7 +322,6 @@ goto :eof
   @echo   node                 prints node report(s)
   @echo   queue                prints queue information
   @echo   logs                 dump container logs
-  @echo   schedulerconf        updates scheduler configuration
   @echo   classpath            prints the class path needed to get the
   @echo                        Hadoop jar and the required libraries
   @echo   daemonlog            get/set the log level for each daemon

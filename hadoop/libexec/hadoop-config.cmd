@@ -80,22 +80,22 @@ if "%1" == "--config" (
 )
 
 @rem
-@rem check to see it is specified whether to use the workers or the
-@rem masters file
-@rem
-
-if "%1" == "--hosts" (
-  set HADOOP_WORKERS=%HADOOP_CONF_DIR%\%2
-  shift
-  shift
-)
-
-@rem
 @rem Set log level. Default to INFO.
 @rem
 
 if "%1" == "--loglevel" (
   set HADOOP_LOGLEVEL=%2
+  shift
+  shift
+)
+
+@rem
+@rem check to see it is specified whether to use the slaves or the
+@rem masters file
+@rem
+
+if "%1" == "--hosts" (
+  set HADOOP_SLAVES=%HADOOP_CONF_DIR%\%2
   shift
   shift
 )
@@ -115,7 +115,7 @@ if not defined JAVA_HOME (
 
 if not exist %JAVA_HOME%\bin\java.exe (
   echo Error: JAVA_HOME is incorrectly set.
-  echo        Please update %HADOOP_CONF_DIR%\hadoop-env.cmd
+  echo        Please update %HADOOP_HOME%\conf\hadoop-env.cmd
   goto :eof
 )
 
@@ -198,21 +198,14 @@ set JAVA_PLATFORM=%JAVA_PLATFORM: =_%
 @rem
 
 @rem Check if we're running hadoop directly from the build
+set JAVA_LIBRARY_PATH=
 if exist %HADOOP_COMMON_HOME%\target\bin (
-  if defined JAVA_LIBRARY_PATH (
-    set JAVA_LIBRARY_PATH=%JAVA_LIBRARY_PATH%;%HADOOP_COMMON_HOME%\target\bin
-   ) else (
-    set JAVA_LIBRARY_PATH=%HADOOP_COMMON_HOME%\target\bin
-   )
+  set JAVA_LIBRARY_PATH=%HADOOP_COMMON_HOME%\target\bin
 )
 
 @rem For the distro case, check the bin folder
 if exist %HADOOP_COMMON_HOME%\bin (
-  if defined JAVA_LIBRARY_PATH (
-    set JAVA_LIBRARY_PATH=%JAVA_LIBRARY_PATH%;%HADOOP_COMMON_HOME%\bin
-  ) else (
-    set JAVA_LIBRARY_PATH=%HADOOP_COMMON_HOME%\bin
-  )
+  set JAVA_LIBRARY_PATH=%JAVA_LIBRARY_PATH%;%HADOOP_COMMON_HOME%\bin
 )
 
 @rem

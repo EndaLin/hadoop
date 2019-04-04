@@ -52,7 +52,6 @@ div.clear hr{
  width: 170px;
  float:left;
  overflow: auto;
- padding-bottom: 3px; /* IE-9 scrollbar-fix */
 }
 #bodyColumn {
   margin-right: 1.5em;
@@ -89,10 +88,6 @@ div.clear hr{
 }
 #navcolumn li.collapsed {
   background-image: url(../images/collapsed.gif);
-}
-#navcolumn li.none {
-  text-indent: -1em;
-  margin-left: 1em;
 }
 #poweredBy {
   text-align: center;

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,52 +13,53 @@
 #  limitations under the License.
 #
 
-MYNAME="${0##*/}"
+# resolve links - $0 may be a softlink
+PRG="${0}"
 
-## @description  Print usage
-## @audience     private
-## @stability    stable
-## @replaceable  no
-function print_usage
-{
-  cat <<EOF
-Usage: ${MYNAME} run|start|status|stop
-commands:
-  run     Run HttpFS server, the HDFS HTTP Gateway
-  start   Start HttpFS server as a daemon
-  status  Return the status of the HttpFS server daemon
-  stop    Stop the HttpFS server daemon
-EOF
-}
+while [ -h "${PRG}" ]; do
+  ls=`ls -ld "${PRG}"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "${PRG}"`/"$link"
+  fi
+done
 
-echo "WARNING: ${MYNAME} is deprecated," \
-  "please use 'hdfs [--daemon start|status|stop] httpfs'." >&2
+BASEDIR=`dirname ${PRG}`
+BASEDIR=`cd ${BASEDIR}/..;pwd`
 
-if [[ $# = 0 ]]; then
-  print_usage
-  exit
+source ${HADOOP_LIBEXEC_DIR:-${BASEDIR}/libexec}/httpfs-config.sh
+
+# The Java System property 'httpfs.http.port' it is not used by HttpFS,
+# it is used in Tomcat's server.xml configuration file
+#
+print "Using   CATALINA_OPTS:       ${CATALINA_OPTS}"
+
+catalina_opts="-Dhttpfs.home.dir=${HTTPFS_HOME}";
+catalina_opts="${catalina_opts} -Dhttpfs.config.dir=${HTTPFS_CONFIG}";
+catalina_opts="${catalina_opts} -Dhttpfs.log.dir=${HTTPFS_LOG}";
+catalina_opts="${catalina_opts} -Dhttpfs.temp.dir=${HTTPFS_TEMP}";
+catalina_opts="${catalina_opts} -Dhttpfs.admin.port=${HTTPFS_ADMIN_PORT}";
+catalina_opts="${catalina_opts} -Dhttpfs.http.port=${HTTPFS_HTTP_PORT}";
+catalina_opts="${catalina_opts} -Dhttpfs.http.hostname=${HTTPFS_HTTP_HOSTNAME}";
+catalina_opts="${catalina_opts} -Dhttpfs.ssl.enabled=${HTTPFS_SSL_ENABLED}";
+catalina_opts="${catalina_opts} -Dhttpfs.ssl.keystore.file=${HTTPFS_SSL_KEYSTORE_FILE}";
+catalina_opts="${catalina_opts} -Dhttpfs.ssl.keystore.pass=${HTTPFS_SSL_KEYSTORE_PASS}";
+
+print "Adding to CATALINA_OPTS:     ${catalina_opts}"
+
+export CATALINA_OPTS="${CATALINA_OPTS} ${catalina_opts}"
+
+# A bug in catalina.sh script does not use CATALINA_OPTS for stopping the server
+#
+if [ "${1}" = "stop" ]; then
+  export JAVA_OPTS=${CATALINA_OPTS}
 fi
 
-case $1 in
-  run)
-    args=("httpfs")
-  ;;
-  start|stop|status)
-    args=("--daemon" "$1" "httpfs")
-  ;;
-  *)
-    echo "Unknown sub-command \"$1\"."
-    print_usage
-    exit 1
-  ;;
-esac
-
-# Locate bin
-if [[ -n "${HADOOP_HOME}" ]]; then
-  bin="${HADOOP_HOME}/bin"
+if [ "${HTTPFS_SILENT}" != "true" ]; then
+  exec ${HTTPFS_CATALINA_HOME}/bin/catalina.sh "$@"
 else
-  sbin=$(cd -P -- "$(dirname -- "$0")" >/dev/null && pwd -P)
-  bin=$(cd -P -- "${sbin}/../bin" >/dev/null && pwd -P)
+  exec ${HTTPFS_CATALINA_HOME}/bin/catalina.sh "$@" > /dev/null
 fi
 
-exec "${bin}/hdfs" "${args[@]}"

@@ -27,5 +27,8 @@ RUN yum install -y openssh-server \
     && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys \
     && /usr/sbin/sshd-keygen -A
 
+RUN /usr/sbin/sshd \
+    && hdfs namenode -format
+
 EXPOSE 9000
 EXPOSE 50070

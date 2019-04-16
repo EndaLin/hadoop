@@ -17,13 +17,13 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-  <properties>
+  <property>
 	  <name>fs.defaultFS</name>
-	  <value>hdfs://localhost:9000</value>
-  </properties>
+	  <value>hdfs://127.0.0.1:9000</value>
+  </property>
 
-  <properties>
+  <property>
 	  <name>hadoop.tmp.dir</name>
 	  <value>file:/root/hadoop/data/</value>
-  </properties>
+  </property>
 </configuration>
